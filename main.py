@@ -1,13 +1,17 @@
 import speech_recognition as sr
 import pyttsx3
 
-lisening = sr.Recognizer()
+listener = sr.Recognizer()
+engine = pyttsx3.init()
 
 try:
-    with sr.Microphone() as src:
-        print('lisening...')
-        voice = lisening.listen(src)
-        com = lisening.recognize_google(voice)
-        print(com)
+    with sr.Microphone() as source:
+        print('listening...')
+        voice = listener.listen(source)
+        command = listener.recognize_google(voice)
+        command = command.lower()
+        if 'tess' in command:
+                command = command.replace('tess', '')
+                print(command)
 except:
-    print('exception')
+    print('error')
